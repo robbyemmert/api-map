@@ -6,7 +6,9 @@ By: Robby Emmert
 - Switch API clients with one line of code.
 
 ### Quick Start  
-1. Set up your global API settings, where `resolver` is a function that returns a promise, given a url, method, data, and network settings:   
+1. Install ApiMap to your project with `npm install --save api-map`  
+
+2. Set up your global API settings, where `resolver` is a function that returns a promise, given a url, method, data, and network settings:   
 
 ```javascript
 import { Api } from 'api-map';
@@ -19,7 +21,7 @@ var api = new Api({
     }
 }, resolver);
 ```  
-2. Define your endpoints  
+3. Define your endpoints  
 
 ```javascript  
 var postList = api.map({
@@ -38,7 +40,7 @@ var singlePost = api.map({
 
 ```
 
-3. Query the api in DRY fashion:
+4. Query the api in DRY fashion:
 
 ```javascript  
 postList.request()

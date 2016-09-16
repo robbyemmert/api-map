@@ -1,27 +1,59 @@
-const defaultApiOptions = {
+const apiDefaults = {
     baseUrl: '/',
     defaultHeaders: []
 }
 
+const endpointDefaults = {
+    method: 'GET',
+    headers: []
+}
+
 export class Api {
-    constructor(options) {
-        this.options = Object.assign({}, options);
-
-        this._resolver = false;
-    }
-
-    resolve(resolver) {
+    constructor(defaults, resolver) {
         if (typeof resolver !== 'function') {
             throw new Error('Resolver must be a function');
         }
 
+        this._defaults = Object.assign({}, defaults);
         this._resolver = resolver;
+    }
+
+    get defaults() {
+        return this._defaults;
+    }
+
+    resolve(url, method, data, options) {
+        return this._resolver(url, method, data, options);
+    }
+
+    map(options) {
+        return new ApiEndpoint(options, this);
     }
 }
 
 export class ApiEndpoint {
-    constructor(options) {
-        this.options = Object.assign({}, options);
+    constructor(defaults, api) {
+        this._checkDefaults(defaults);
+        this._defaults = Object.assign({}, options);
+        this._api = api;
+    }
 
+    get defaults() {
+        return this._defaults;
+    }
+
+    get api() {
+        return this._api;
+    }
+
+    _checkDefaults(defaults) {
+        if (!defaults.url) {
+            throw new Error('API endpoint must specify a URL');
+        }
+    }
+
+    request(data, options) {
+        compiledOptions = Object.assign({}, this.api.defaults, this.defaults, options);
+        return this.api.resolve(this._defaults.url, this._defualts.method, data, compiledOptions);
     }
 }

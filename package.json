@@ -1,8 +1,8 @@
 {
-  "name": "jsbuild",
+  "name": "api-map",
   "version": "1.0.0",
-  "description": "A set of modern build tools for JavaScript",
-  "main": "index.js",
+  "description": "A tool for mapping your REST endpoints to any JS client",
+  "main": "dist/api-map.js",
   "scripts": {
     "start": "./node_modules/.bin/webpack-dev-server --colors --progress --inline",
     "build": "./node_modules/.bin/webpack --progress --colors"
@@ -28,9 +28,7 @@
     "sass-loader": "^3.2.0",
     "style-loader": "^0.13.1",
     "webpack": "^1.13.0",
-    "webpack-dev-server": "^1.15.1"
-  },
-  "dependencies": {
+    "webpack-dev-server": "^1.15.1",
     "bootstrap-grid": "^2.0.1",
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
@@ -38,5 +36,8 @@
     "react-router": "^2.5.1",
     "redux": "^3.5.2",
     "redux-thunk": "^2.1.0"
+  },
+  "dependencies": {
+
   }
 }

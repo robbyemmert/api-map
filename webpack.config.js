@@ -76,11 +76,13 @@ var devConfig = {
 }
 
 var buildConfig = {
-    entry: './src/app.jsx',
+    entry: './src/api-map.js',
     output: {
+        library: 'ApiMap',
+        libraryTarget: 'umd',
         publicPath: '/',
-        path: __dirname + '/public',
-        filename: 'js/app.js'
+        path: __dirname + '/dist',
+        filename: 'js/api-map.js'
     },
     devtool: 'source-map',
     module: {
@@ -114,16 +116,11 @@ var buildConfig = {
 		autoprefixer({ browsers: ['last 3 versions'] })	// Automatically adds vendor prefixes for x browser versions (and all vendors). :D
 	],
     plugins: [
-        // HtmlWebpackPlugin is what Automatically injects your styles and javascript into your index.html file.
-        new HtmlWebpackPlugin({
-            title: 'Webpack Build',
-            template: './src/index.html'
-        }),
         // We're letting webpack know that we're in a development environment
         new webpack.DefinePlugin({
 			'process.env.NODE_ENV': '"production"'
 		}),
-        new CleanWebpackPlugin(['public/fonts', 'public/js', 'public/styles', 'public/index.html']),
+        new CleanWebpackPlugin(['dist']),
         cssExtractor,
         new webpack.optimize.UglifyJsPlugin({
             compress: {
@@ -132,19 +129,7 @@ var buildConfig = {
             sourceMap: true,
             minimize: true
         })
-    ],
-    devServer: {
-        historyApiFallback: true,
-        contentBase: './public',
-        proxy: {
-            // Proxy the url /api to an external API.  This way you don't have to install the server on your computer and can get coding faster.
-            '/api': {
-                target: 'https://your-api.com',
-                xfwd: true,
-                changeOrigin: true
-            }
-        }
-    }
+    ]
 }
 
 /*

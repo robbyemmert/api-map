@@ -1,13 +1,6 @@
-import { Api, Validators } from './api-map';
+import { Api } from './api-map';
 
-var api = new Api({
-    baseUrl: '/api',
-    defaultHeaders: {
-        contentType: 'application/json'
-    }
-});
-
-api.resolve((url, method, data, options) => {
+var customResolver = (url, method, data, options) => {
 
     let optionalOptions = {
         headers: [],
@@ -18,12 +11,24 @@ api.resolve((url, method, data, options) => {
 
     options = Object.assign({}, optionalOptions, options, mandatoryOptions);
 
+    if (method === 'GET' && typeof data === 'object') {
+        let paramString = '?' + Object.keys(data).map(key => `${key}=${data[key]}`).join('&');
+        url = url + paramString;
+    }
+
     return fetch(url, {
         method: method,
-        body: JSON.stringify(data),
+        body: method != 'GET' ? JSON.stringify(data) : undefined,
         headers: options.headers,
         redirect: options.redirect
     });
-})
+};
+
+var api = new Api({
+    baseUrl: '/api',
+    defaultHeaders: {
+        contentType: 'application/json'
+    }
+}, customResolver);
 
 export default api;

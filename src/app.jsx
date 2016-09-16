@@ -9,6 +9,8 @@ import styles from './styles'; // eslint-disable-line no-unused-vars
 // JavaScript dependencies
 import React from 'react'; // eslint-disable-line no-unused-vars
 import { render } from 'react-dom';
+import { test } from './endpoints';
+window.test = test;
 
 render((
     <div className="container">

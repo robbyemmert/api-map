@@ -19,7 +19,7 @@ export class Api {
     }
 
     get defaults() {
-        return this._defaults;
+        return Object.assign({}, apiDefaults, this._defaults);
     }
 
     resolve(url, method, data, options) {
@@ -34,7 +34,7 @@ export class Api {
 export class ApiEndpoint {
     constructor(defaults, api) {
         this._checkDefaults(defaults);
-        this._defaults = Object.assign({}, options);
+        this._defaults = Object.assign({}, defaults);
         this._api = api;
     }
 
@@ -53,7 +53,7 @@ export class ApiEndpoint {
     }
 
     request(data, options) {
-        compiledOptions = Object.assign({}, this.api.defaults, this.defaults, options);
-        return this.api.resolve(this._defaults.url, this._defualts.method, data, compiledOptions);
+        let compiledOptions = Object.assign({}, endpointDefaults, this.api.defaults, this.defaults, options);
+        return this.api.resolve(this._defaults.url, this._defaults.method, data, compiledOptions);
     }
 }

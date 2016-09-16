@@ -18,7 +18,7 @@ var devConfig = {
         path: __dirname + '/public',
         filename: 'js/app.js'
     },
-    devtool: 'eval',
+    devtool: 'source-map',
     module: {
         // Pre Loaders run before the transpiler.  They're great for unit testing, code linting, etc.
 		preLoaders: [

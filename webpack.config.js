@@ -66,9 +66,10 @@ var devConfig = {
         proxy: {
             // Proxy the url /api to an external API.  This way you don't have to install the server on your computer and can get coding faster.
             '/api': {
-                target: 'https://your-api.com',
+                target: 'https://jsonplaceholder.typicode.com',
                 xfwd: true,
-                changeOrigin: true
+                changeOrigin: true,
+                pathRewrite: {'^/api' : ''}
             }
         }
     }

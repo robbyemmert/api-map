@@ -53,7 +53,8 @@ export class ApiEndpoint {
     }
 
     request(data, options) {
+        let url = typeof this._defaults.url === 'function' ? this._defaults.url(data) : this._defaults.url;
         let compiledOptions = Object.assign({}, endpointDefaults, this.api.defaults, this.defaults, options);
-        return this.api.resolve(this._defaults.url, this._defaults.method, data, compiledOptions);
+        return this.api.resolve(this.api.defaults.baseUrl + url, compiledOptions.method, data, compiledOptions);
     }
 }

@@ -1,6 +1,10 @@
 import api from './api';
 
-export let test = api.map({
-    url: '/test',
+export let postList = api.map({
+    url: '/posts',
     method: 'GET'
+});
+
+export let singlePost = api.map({
+    url: params => `/posts/${params.id}`
 });

@@ -2,7 +2,7 @@
   "name": "api-map",
   "version": "1.0.0",
   "description": "A tool for mapping your REST endpoints to any JS client",
-  "main": "dist/api-map.js",
+  "main": "dist/js/api-map.js",
   "scripts": {
     "start": "./node_modules/.bin/webpack-dev-server --colors --progress --inline",
     "build": "./node_modules/.bin/webpack --progress --colors"

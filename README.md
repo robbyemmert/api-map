@@ -13,6 +13,8 @@ By: Robby Emmert
 ```javascript
 import { Api } from 'api-map';
 import resolver from './custom-resolver';
+// OR
+import resolver from 'api-map-fetch-resolver' // or a pre-built resolver of your choice
 
 var api = new Api({
     baseUrl: '/api',

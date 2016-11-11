@@ -8,7 +8,7 @@ By: Robby Emmert
 ### Quick Start  
 1. Install ApiMap to your project with `npm install --save api-map`  
 
-2. Set up your global API settings, where `resolver` is a function that returns a promise, given a url, method, data, and network settings:   
+2. Set up your global API settings, where `resolver` is a function that returns a promise, given a url, method, data, and network settings (read more about resolvers [here](docs/resolvers.md) or see a list of pre-build resolvers available on NPM [here](docs/resolver-list.md)).   
 
 ```javascript
 import { Api } from 'api-map';

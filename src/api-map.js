@@ -23,7 +23,8 @@ export class Api {
     }
 
     resolve(url, method, data, options) {
-        return this._resolver(url, method, data, options);
+        return this._resolver(url, method, data, options)
+            .then(res => new ApiResponse(res), res => new ApiResponse(res));
     }
 
     map(options) {
@@ -56,5 +57,30 @@ export class ApiEndpoint {
         let url = typeof this._defaults.url === 'function' ? this._defaults.url(data) : this._defaults.url;
         let compiledOptions = Object.assign({}, endpointDefaults, this.api.defaults, this.defaults, options);
         return this.api.resolve(this.api.defaults.baseUrl + url, compiledOptions.method, data, compiledOptions);
+    }
+}
+
+export class ApiResponse {
+    constructor(data) {
+        Object.keys(data).forEach(key => {
+            this[key] = data[key];
+        });
+
+        this._checkValue('url', data.url, 'string');
+        this._checkValue('method', data.method, 'string');
+        this._checkValue('status', data.status, 'number');
+        this._checkValue('headers', data.headers, () => Array.isArray(data.headers));
+        this._checkValue('message', data.message, 'string');
+        // this._checkValue('requestBody', data.requestBody, () => typeof data.data !== undefined);
+        // this._checkValue('requestOptions', data.requestOptions, () => true);
+        // this._checkValue('data', data.url, () => true);
+    }
+
+    _checkValue(propName, value, expectedType) {
+        if (typeof expectedType === 'function') {
+            expectedType = expectedType(value);
+        } else if (typeof value !== expectedType) {
+            console.warn(`Your API resolver returned an unexpected ${propName} of type ${typeof value}`, value);
+        }
     }
 }

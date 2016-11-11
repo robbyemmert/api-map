@@ -1,5 +1,6 @@
 import { Api } from './api-map';
 import resolver from 'api-map-fetch-resolver';
+window.resolver = resolver;
 
 var api = new Api({
     baseUrl: '/api',
@@ -7,5 +8,6 @@ var api = new Api({
         contentType: 'application/json'
     }
 }, resolver);
+window.api = api;
 
 export default api;

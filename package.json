@@ -1,6 +1,6 @@
 {
   "name": "api-map",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A tool for mapping your REST endpoints to any JS client",
   "main": "dist/js/api-map.js",
   "scripts": {
@@ -8,6 +8,10 @@
     "build": "./node_modules/.bin/webpack --progress --colors"
   },
   "author": "Robby Emmert",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/robbyemmert/api-map"
+  },
   "license": "MIT",
   "devDependencies": {
     "autoprefixer": "^6.3.6",
